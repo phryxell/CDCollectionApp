@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CDCollectionApp.Models.Artist>
+
+@{
+    ViewData["Title"] = "Artister";
+}
+
+<h1>Artister</h1>
+<p>Lägg till artist för att kunna addera skivor för densamma.</p>
+<p>
+    <a asp-action="Create">Lägg till artist</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ArtistId">Ändra</a> |
+                    <a asp-action="Details" asp-route-id="@item.ArtistId">Information</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ArtistId">Radera</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

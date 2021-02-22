@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CDCollectionApp.Models.CD>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-controller="CDs" asp-action="Index" method="get">
+    <p>
+        Sök CD-skiva: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+
+<p>
+    <a asp-action="Create">Lägg till ny skiva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Skivans namn
+            </th>
+            <th>
+                Releasedatum
+
+            </th>
+            <th>
+                Tillgänglig
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artist)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string date = @item.ReleaseDate.ToString("yyyy-MM-dd");
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @date
+                </td>
+                <td>
+                    @Html.Raw((item.Available) ? "Ja" : "Utlånad")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artist.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CDId">Ändra</a> |
+                    <a asp-action="Details" asp-route-id="@item.CDId">Information</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CDId">Radera</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

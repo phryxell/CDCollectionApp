@@ -1,0 +1,48 @@
+﻿@model CDCollectionApp.Models.CD
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Radera</h1>
+
+<h3>Är du säker på att du vill radera Album?</h3>
+<div>
+    <h4>CD</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Namn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Utgiven
+        </dt>
+        <dd class="col-sm-10">
+
+            @ViewData["Date"]
+
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Available)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.Raw((Model.Available) ? "Ja" : "Utlånad")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Artist)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Artist.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CDId" />
+        <input type="submit" value="Radera" class="btn btn-danger" /> |
+        <a asp-action="Index">Tillbaka till lista</a>
+    </form>
+</div>

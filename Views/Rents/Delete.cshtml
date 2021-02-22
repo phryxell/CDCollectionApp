@@ -1,0 +1,39 @@
+﻿@model CDCollectionApp.Models.Rent
+
+@{
+    ViewData["Title"] = "Lämna tillbaka";
+}
+
+<h1>Lämna tillbaka</h1>
+
+<h3>Är du säker på att du vill lämna tillbaka CD-skivan?</h3>
+<div>
+    <h4>Rent</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Namn
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Lånedatum
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RentDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CD)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CD.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="RentId" />
+        <input type="submit" value="Lämna tillbaka" class="btn btn-danger" /> |
+        <a asp-action="Index">Gå tillbaka till listan</a>
+    </form>
+</div>

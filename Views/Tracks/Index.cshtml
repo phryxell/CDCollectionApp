@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CDCollectionApp.Models.Track>
+
+@{
+    ViewData["Title"] = "Låtar";
+}
+
+<h1>Låtar</h1>
+
+<p>
+    <a asp-action="Create">Lägg till någon favoritlåt du har på befintliga CD-skivor!</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Titel
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CD)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CD.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TrackId">Ändra</a> |
+                    <a asp-action="Details" asp-route-id="@item.TrackId">Information</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TrackId">Radera</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
