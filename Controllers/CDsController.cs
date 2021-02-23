@@ -20,46 +20,19 @@ namespace CDCollectionApp.Controllers
         }
 
         // GET: CDs
-        public async Task<IActionResult> Index(string searchString, int id)
+        public async Task<IActionResult> Index(string searchString)
         {
 
-            var cdContext = _context.CDs.Include(c => c.Artist);
-
+            //creates a LINQ query
             var cds = from m in _context.CDs
                       select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                cds = cds.Where(s => s.Name.Contains(searchString));
-                foreach (var t in cdContext)
-                {
-                    var x = t.ArtistId;
-                    if (x == id)
-                    {
-                        ViewData["test"] = t.Name;
-
-                    }
-                }
-
-
-                return View(await cds.ToListAsync());
+                cds = cds.Where(s => s.Name.ToLower().Contains(searchString.ToLower()) || s.Artist.Name.ToLower().Contains(searchString.ToLower()));
             }
 
-            cds = _context.CDs.Include(c => c.Artist);
-
-
-
-            var newdate = _context.CDs.Include(x => x.ReleaseDate);
-
-            ViewData["Dates"] = newdate;
-            return View(await cdContext.ToListAsync());
-        }
-        /*Search */
-
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
+            return View(await cds.Include("Artist").ToListAsync());
         }
 
         // GET: CDs/Details/5

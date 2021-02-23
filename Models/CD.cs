@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace CDCollectionApp.Models
         public int CDId { get; set; }
 
         [DisplayName("Namn")]
+        [Required(ErrorMessage = "Vänligen ange titel för CD-skivan du önskar lägga till")]
         public string Name { get; set; }
 
         [DisplayName("Utgivningsdatum")]
@@ -37,6 +39,7 @@ namespace CDCollectionApp.Models
         public int ArtistId { get; set; }
 
         [DisplayName("Namn")]
+        [Required(ErrorMessage = "Vänligen ange artist/band")]
         public string Name { get; set; }
         public ICollection<CD> CDs { get; set; }
     }
@@ -45,6 +48,8 @@ namespace CDCollectionApp.Models
         public int RentId { get; set; }
 
         [DisplayName("Namn")]
+        [MinLength(2, ErrorMessage = "Namn måste vara minst två tecken")]
+        [Required(ErrorMessage = "Vänligen ange ditt namn för att låna en CD-skiva")]
         public string Name { get; set; }
 
         [DisplayName("Lånedatum")]
@@ -57,6 +62,7 @@ namespace CDCollectionApp.Models
         public int TrackId { get; set; }
 
         [DisplayName("Namn")]
+        [Required(ErrorMessage = "Vänligen ange ditt låtens titel")]
         public string Name { get; set; }
         public int CDId { get; set; }
         public CD CD { get; set; }
